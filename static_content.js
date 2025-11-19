@@ -1,25 +1,25 @@
 // --------------------------------------------------
-// Complited_TODO 1.2 and 1.4
+// completed_TODO 1.2 and 1.4
 // --------------------------------------------------
 
-// Complited_TODO 1.4: Accept the data by declaring a variable that will contain the data like this: 
+// completed_TODO 1.4: Accept the data by declaring a variable that will contain the data like this: 
 // const Introduction = ({your variable name here}) => {...}
 const Introduction = ({data}) => {
-    // Complited_TODO 1.2: Declare a variable which contains your intro text by writing: const introText = "your text here";
+    // completed_TODO 1.2: Declare a variable which contains your intro text by writing: const introText = "your text here";
 
     // counting total dead&missing
        const totalCasualties = data 
         ? data.reduce((sum, d) => sum + d['Total Dead and Missing'], 0) 
         : 0;
     
-    // Complited_TODO 1.2: Add a div element which wraps the text "Description" inside the returned react fragment <> </>
-    // Complited_TODO 1.2: Insert a line break using <br/> after the Description text
-    // Complited_TODO 1.2: Add the className attribute to the diff with the value "introTitle". You can do this as follows
+    // completed_TODO 1.2: Add a div element which wraps the text "Description" inside the returned react fragment <> </>
+    // completed_TODO 1.2: Insert a line break using <br/> after the Description text
+    // completed_TODO 1.2: Add the className attribute to the diff with the value "introTitle". You can do this as follows
     // <div className="introTitle">
-    // Complited_TODO 1.2: Add another div with className "intro". This div wraps dynamic text. For this we will simply enter
+    // completed_TODO 1.2: Add another div with className "intro". This div wraps dynamic text. For this we will simply enter
     // the introText variable we specified before inside the div but to make sure that it will show the 
     // text inside the variable and not the name of the variable we have to wrap it in curly braces.
-    // Complited_TODO 1.4: Modify the text above with your data metrics. Individual strings can be added together using the + operator for example
+    // completed_TODO 1.4: Modify the text above with your data metrics. Individual strings can be added together using the + operator for example
     // "hello " + "everyone" will give you "hello everyone". This also works with a string and a number.
     const introText = 'This visualization is based on the Missing Migrants data for 2019. The total reported \'dead and missing migrants\' across all incidents is ' + totalCasualties + 'people';
 
@@ -40,12 +40,12 @@ const Introduction = ({data}) => {
 
 
 // --------------------------------------------------
-// Complited_TODO 1.5 (World Sphere and Graticule)
+// completed_TODO 1.5 (World Sphere and Graticule)
 // --------------------------------------------------
 
-// Complited_TODO 1.5: define a projection, such as d3.geoNaturalEarth1 or d3.geoEquirectangular (see the documentation, there are many choices)
-// Complited_TODO 1.5: define a path generator using d3.geoPath that will use the given projection method
-// Complited_TODO 1.5: generate the lon/lat grid lines, using d3.geoGraticule
+// completed_TODO 1.5: define a projection, such as d3.geoNaturalEarth1 or d3.geoEquirectangular (see the documentation, there are many choices)
+// completed_TODO 1.5: define a path generator using d3.geoPath that will use the given projection method
+// completed_TODO 1.5: generate the lon/lat grid lines, using d3.geoGraticule
 const projection = d3.geoNaturalEarth1();
 const path = d3.geoPath(projection);
 const graticule =d3.geoGraticule();
@@ -53,12 +53,12 @@ const graticule =d3.geoGraticule();
 
 const WorldGraticule = () => (
     // TODO 4.2: Memoization for sphere and graticules
-    // Complited_TODO 1.5: add className worldGraticule to style with information from css to the g tag
+    // completed_TODO 1.5: add className worldGraticule to style with information from css to the g tag
     <g className="worldGraticule">
-        {/* // Complited_TODO 1.5: remove the rectangle placeholder */}
+        {/* // completed_TODO 1.5: remove the rectangle placeholder */}
         <>
-            {/* // Complited_TODO 1.5: draw a sphere under the projection. The function "path" applies the projection which is simply inserted in the d attribute of path.
-            // Complited_TODO 1.5: draw the graticule by creating a path element similar to what you did before */}
+            {/* // completed_TODO 1.5: draw a sphere under the projection. The function "path" applies the projection which is simply inserted in the d attribute of path.
+            // completed_TODO 1.5: draw the graticule by creating a path element similar to what you did before */}
             <path className="sphere" d={path({ type: 'Sphere' })} />
             <path className="graticule" d={path(graticule())} />
         </>
