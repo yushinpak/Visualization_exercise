@@ -32,14 +32,14 @@ circle {
     font-size: 0.5em;
     fill:#8E8883;
 }
-.intro {
-    color:black;
-    text-overflow: ellipsis;
-    max-width: 960px;
-    font-size: 0.75em;
-}
 .introTitle {
     font-size: 1em;
     font-weight: bold;
-    color:black;
+    color:red;
+}
+.intro {
+    color:blue;
+    text-overflow: ellipsis;
+    max-width: 960px;
+    font-size: 0.75em;
 }
