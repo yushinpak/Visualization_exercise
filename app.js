@@ -23,7 +23,7 @@ const App = () => {
     // 			 Use .filter on the data to only include values that are within the brush extent.
     // 			 Make sure to handle the situation when the brush extent is not yet defined.
 
-    // completed_1.2: Inside the returned react fragment and before the svg element add your new Introduction component in the same
+    // completed_TODO 1.2: Inside the returned react fragment and before the svg element add your new Introduction component in the same
     // way as the WorldGraticule element. Don't pass in any arguments yet.
     // completed_TODO 1.4: Pass the data to the Introduction component just like width and height are passed to WorldGraticule.
     return (

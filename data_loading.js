@@ -53,7 +53,7 @@ const row = d => {
 
 // place data reading logic in a hook (hooks start with 'use')
 const useData = () => {
-    // Comlited_TODO 1.3: create a state that is initially null
+    // completed_TODO 1.3: create a state that is initially null
     const [data, setData] = React.useState(null);
     
     // useEffect ensures that the data is only loaded once. if it was loaded before the function
