@@ -35,11 +35,17 @@ circle {
 .introTitle {
     font-size: 1em;
     font-weight: bold;
-    color:red;
+    color:green;
 }
 .intro {
-    color:blue;
+    color:green;
     text-overflow: ellipsis;
     max-width: 960px;
     font-size: 0.75em;
+}
+
+.bubble {
+  color: 'red';
+  opacity: 1;
+  stroke: 'black';
 }

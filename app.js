@@ -11,10 +11,15 @@ const App = () => {
     // read world atlas data amd migrant data
     const worldAtlas = useWorldAtlas();
     const data = useData();
-    // completed_TODO 1.3: if the data was not loaded yet return an html element that indicates that the data is still loading.
+
     if (!worldAtlas || !data) {
         return <pre>Loading...</pre>
     }
+
+    // projection
+    const projection = d3.geoMercator() 
+    .scale(150) 
+    .translate([width / 2, height / 2]); 
     
     // TODO 4.1: define an accessor function that will be used when filtering the data. The function
     // 			 should extract the reported date of the incident.
@@ -23,17 +28,17 @@ const App = () => {
     // 			 Use .filter on the data to only include values that are within the brush extent.
     // 			 Make sure to handle the situation when the brush extent is not yet defined.
 
-    // completed_TODO 1.2: Inside the returned react fragment and before the svg element add your new Introduction component in the same
-    // way as the WorldGraticule element. Don't pass in any arguments yet.
-    // completed_TODO 1.4: Pass the data to the Introduction component just like width and height are passed to WorldGraticule.
+
     return (
         <>     
             <Introduction data={data}/>
             <svg width={width} height={height}>
-                // completed_TODO 1.5: remove width and height from the world graticule component
+              
                 <WorldGraticule/>
-                // TODO 2.1: add the countries element and pass it the world Atlas
-                // TODO 2.2: add the Bubbles element and pass it the data
+                {/* // Completed_TODO 2.1: add the countries element and pass it the world Atlas */}
+                <Countries worldAtlas={worldAtlas} />
+                {/* // TODO 2.2: add the Bubbles element and pass it the data */}
+                <Bubbles data={data} projection={projection} /> 
                 // TODO 4.1: Pass the filtered data to bubbles
                 <g transform={`translate(0, ${height - dateHistogramSize * height})`}>
                     // TODO 3.1: create a Histogram element and pass it the width and height
