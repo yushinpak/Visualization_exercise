@@ -17,9 +17,7 @@ const App = () => {
     }
 
     // projection
-    const projection = d3.geoMercator() 
-    .scale(150) 
-    .translate([width / 2, height / 2]); 
+    // const projection = d3.geoMercator().scale(150).translate([width / 2, height / 2]); 
     
     // TODO 4.1: define an accessor function that will be used when filtering the data. The function
     // 			 should extract the reported date of the incident.
@@ -27,7 +25,6 @@ const App = () => {
     // TODO 4.1: Setup the filtered data. The data is filtered based on the extent of the brush.
     // 			 Use .filter on the data to only include values that are within the brush extent.
     // 			 Make sure to handle the situation when the brush extent is not yet defined.
-
 
     return (
         <>     
@@ -37,7 +34,7 @@ const App = () => {
                 <WorldGraticule/>
                 {/* // Completed_TODO 2.1: add the countries element and pass it the world Atlas */}
                 <Countries worldAtlas={worldAtlas} />
-                {/* // TODO 2.2: add the Bubbles element and pass it the data */}
+                {/* // Complted_TODO 2.2: add the Bubbles element and pass it the data */}
                 <Bubbles data={data} projection={projection} /> 
                 // TODO 4.1: Pass the filtered data to bubbles
                 <g transform={`translate(0, ${height - dateHistogramSize * height})`}>

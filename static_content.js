@@ -56,14 +56,13 @@ const Countries = ({
     // Completed_TODO 2.1: inside the fragment enter another JS scope 
     // Completed_TODO: 2.1: draw another path for the interiors 
     <>
-    <g className="countries" >
-        {
-        land.features.map((feature, index) => (
-            <path key={index} d={path(feature)}/>
-        ))
-        }
-    </g>
-        { <path d={path(interiors)}/>} 
-        {/* ?!!!!: I didn't get why he required us to put this in JS scope. We can just return it.... why?  */}
+        <g className="countries" >
+            {
+            land.features.map((feature, index) => (
+                <path key={index} d={path(feature)}/>
+            ))
+            }
+        </g>
+        <path d={path(interiors)}/>
     </>
 );

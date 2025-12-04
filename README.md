@@ -1,59 +1,67 @@
-# Things to do(check list)
-1.2 Creating component 'introduction'
-(index.html) insert a title
-(static_content & app.js) make 'introduction' component and place in main react app(app.js)
+# the first week
+1.⁠ ⁠Data Loading and Preprocessing (TODO 1.3)
+	•	The coordinates (Location Coordinates) were converted into a number array (d.coords) and reversed to match the [Longitude, Latitude] order.
+	•	The casualty count (Total Dead and Missing) was explicitly converted to a Number type using the unary plus operator (+).
+	•	The loading check if (!worldAtlas || !data) ensures the visualization does not render until both datasets are fully loaded.
 
-1.3 Data loading status
-(app.js) handeling loading state
-(data_loading.js) data loading, processing and return
+⸻
 
-1.4 Dynamic Introduction Text Using Loaded Data
-(app.js) pass the loaded data as a prop to the 'introducion' component
-(static_content.js) receive data and use it. using variable, show in dynamic text
+2.⁠ ⁠Introduction Component (Introduction) Completion (TODO 1.2 & 1.4)
+	•	The data array was passed as a prop (data={data}) to enable the component to calculate dynamic data metrics.
+	•	Total casualties (totalCasualties) were calculated using the reduce method on the data array.
+	•	The final output uses a dynamic string (e.g., '... ' + totalCasualties + ' people') to display the calculated metric.
+	•	The component structure follows the requirement from TODO 1.2, using:
+	•	<div className="introTitle">Description<br/></div>
+	•	<div className="intro">{introText}</div>
 
-1.5 Using D3, make basic stuff for map
-(app.js) remove width and height from the world graticule component
-(static_content.js) using D3 library, modify WorldGraticule component
+⸻
 
-2.1 Rendering Country Boundaries(countries component and path)
-(static_content.js) creath 'path' element in 'countries'
-(app.js) add the countries element and pass it the world Atlas
+3.⁠ ⁠World Map Background (WorldGraticule) Implementation Complete (TODO 1.5)
+	•	D3 tools (projection, path, graticule) were defined globally to handle geographic data transformations.
+	•	The path generator was linked to the projection (d3.geoPath(projection)) to convert GeoJSON into SVG paths.
+	•	The Sphere was drawn using:
+<path className="sphere" d={path({ type: 'Sphere' })} />
+	•	The Graticules (grid lines) were drawn using:
+<path className="graticule" d={path(graticule())} />
+	•	The placeholder <rect> was removed, and the <g> element received the styling class worldGraticule.
 
-2.2 
-(app.js) add the Bubbles element and pass it the data
-(bubbles.js) data -> make circle
+# the second week
+We will draw the country boundaries and the bubbles representing the number of dead and missing migrants
 
-3.1
-(app.js) histogram element(width, height)
-(bar_chart.js) bar chart rendering
+Task 1 - Countries
+0) Add countries component and pass worldAtlas(app.js)
+1) The outline of the land masses which will be filled in according to the styling information at the top of the file(static_content.js)
+2) The interiors which will be drawn to indicate borders between two countries(static_content.js)
 
-3.2
-(bar_chart) advancing bar_chart
+Task 2 - Bubbles
+A scatter point with dots scaled according to the number of missing and dead migrants.
+-> The location will be given by the coordinates of the incident
 
-4.1
-(app.js) add state(brushExtent), pass filtered data to bubbles
-(bar_chart) adjust histogram thing
+0) Add bubbles component(index.html)
+0) Define projection first and use bubbles component(pass projection and data) (app.js)
 
-4.2
-(bar_chart) memoization for scale, the binned data
-(bubbles) memoization for siza scale
-(static_content) memoization for sphere and graticules, land and interiors
+The bubble will be implemented in the bubbles component. (bubbles.js)
+1) size scale: tell us how to map the number from the data set to the radius of the circle
+-> the area of the circle should be propotional to the number from the dataset
+2) pass the coordinates through the projection before adding them as the coordinates of the circle
 
-# visualization_exercise*# What we should know before start *
-1.⁠ ⁠study basic concept of React
-2.⁠ ⁠grasp basic role of the files 
 
-# What we have to talk about 04.11.25
-1. how should we write the code
-2. test pull and push once
-3. download plugin live server&git pull and push plugin 
++) What is projection?
+A projection is a mathematical transformation function used by D3.js to convert three-dimensional, spherical geographic coordinates (latitude and longitude) into two-dimensional pixel coordinates that can be drawn on a flat surface, like an SVG canvas on a computer screen.
 
-# File role - yushin
-    • app.js – rendering
-    • bar_chart.js – bar chart rendering
-    • bubbles.js – bubble map making
-    • data_loading.js – data processing
-    • static_content.js – basic element of map 
-    • index.html – main html
-    • style.css – make style 
-README.md – word about project
+- Input: Geographic Coordinates, typically [Longitude, Latitude].
+- Output: Screen Coordinates, [x, y] pixels.
+
+This transformation is essential because drawing a round Earth on a flat screen inherently introduces distortion (in area, distance, or shape). D3 provides various projection methods (Mercator, Orthographic, etc.) to choose how this distortion is managed.
+
+You can find further information here: https://www.geeksforgeeks.org/javascript/d3-js-geomercator-function/
+
++) Difference of d3.scaleLinear and d3.scaleSqrt
+The primary difference between d3.scaleLinear and d3.scaleSqrt lies in the mathematical relationship between the input data value (domain) and the output size (range).
+
+- scalrLinear: Proportional (y∝x). A straight-line relationship where the output is directly proportional to the input.
+- scaleSqrt: Square Root Proportional (y∝ x ). The output is proportional to the square root of the input.
+=> why scaleSqrt is the better option: 
+If used for a circle's radius (r), the area (A∝r2 ) grows disproportionately to the data value. If the data value doubles, the radius doubles, but the area quadruples, visually exaggerating the difference. Using d3.scaleLinear would lead to a perceptually misleading chart where large bubbles appear far more significant than their data values warrant.
+
++) 
