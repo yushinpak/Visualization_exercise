@@ -15,9 +15,6 @@ const App = () => {
     if (!worldAtlas || !data) {
         return <pre>Loading...</pre>
     }
-
-    // projection
-    // const projection = d3.geoMercator().scale(150).translate([width / 2, height / 2]); 
     
     // TODO 4.1: define an accessor function that will be used when filtering the data. The function
     // 			 should extract the reported date of the incident.
@@ -44,7 +41,6 @@ const App = () => {
             </svg>
         </>
     );
-    
 };
 
 // place the visualization into the root element

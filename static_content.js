@@ -22,7 +22,6 @@ const Introduction = ({data}) => {
         )
 };
 
-
 // World Sphere and Graticule
 const projection = d3.geoNaturalEarth1();
 const path = d3.geoPath(projection);
@@ -38,7 +37,7 @@ const WorldGraticule = () => (
 );
 
 // --------------------------------------------------
-// Completed_TODO 2.1 -> BUT ONE QUESTION LEFT
+// Completed_TODO 2.1 
 // --------------------------------------------------
 
 // the data we work on is composed of land and interiors (use destructuring)
@@ -55,14 +54,8 @@ const Countries = ({
     // Completed_TODO 2.1: map the land features to path elements that draw the land masses (styling will make sure the paths are filled with the correct color)
     // Completed_TODO 2.1: inside the fragment enter another JS scope 
     // Completed_TODO: 2.1: draw another path for the interiors 
-    <>
-        <g className="countries" >
-            {
-            land.features.map((feature, index) => (
-                <path key={index} d={path(feature)}/>
-            ))
-            }
-        </g>
-        <path d={path(interiors)}/>
-    </>
+    <g className="countries" >
+        <path className="land" d={path(land)}/>
+        <path className="interiors" d={path(interiors)} />
+    </g>
 );

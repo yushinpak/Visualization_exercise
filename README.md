@@ -64,4 +64,37 @@ The primary difference between d3.scaleLinear and d3.scaleSqrt lies in the mathe
 => why scaleSqrt is the better option: 
 If used for a circle's radius (r), the area (A∝r2 ) grows disproportionately to the data value. If the data value doubles, the radius doubles, but the area quadruples, visually exaggerating the difference. Using d3.scaleLinear would lead to a perceptually misleading chart where large bubbles appear far more significant than their data values warrant.
 
-+) 
++) Projection is already global variable, so you don't have to declare it again in app.js!(you can find it in static_content.js)
+
+## More details about bubbles
+1. Data Accessor and Maximum Value Calculation
+
+Size Accessor (sizeValue): You defined an arrow function, sizeValue, to extract the key quantitative measure, "Total Dead and Missing", from each data item (d). This function serves as the essential input accessor for both the d3.max function and the scaling process.
+
+Maximum Value Calculation (maxDataValue): You used d3.max along with your sizeValue function to calculate the highest value in the entire dataset. This maxDataValue is critical because it precisely sets the upper limit of the scale's domain, ensuring that the largest data point corresponds exactly to the maximum visual size (maxRadius).
+
+2. Size Scale Definition
+
+Scale Choice and Definition: You chose and defined the d3.scaleSqrt (square root scale). This is the correct choice because it ensures that the circle's area is proportional to the data value, preventing visual misrepresentation.
+
+Domain and Range Setup: You properly configured the scale:
+
+The domain was set using [0, maxDataValue], defining the input data range.
+
+The range was set using [0, maxRadius], defining the output radius range (e.g., 0 to 15 pixels).
+
+Role: The resulting sizeScale function converts the raw casualty count (e.g., 150) into a calculated pixel radius (e.g., 7.5px).
+
+3. SVG Rendering and Coordinate Transformation
+
+Group Container: You wrapped the rendering output in an SVG group element, <g className="bubbleMarks">, which groups all the generated bubbles for easier styling and management.
+
+Data Mapping: You used the standard JavaScript map method to iterate over the data array, which allows React to efficiently generate a list of SVG elements corresponding to each data record (row).
+
+Coordinate Transformation: Inside the map loop, you called the projection(row.coords) function. This step is crucial as it converts the geographic latitude/longitude coordinates (row.coords) into 2D screen coordinates (x, y), placing the bubble accurately on the map.
+
+Circle Element Generation: You returned an SVG <circle> element for each data point:
+
+cx and cy use the newly projected screen coordinates.
+
+The radius (r) is assigned the value calculated by the scale: sizeScale(sizeValue(row)), ensuring the visual size is proportional to the incident's severity.
